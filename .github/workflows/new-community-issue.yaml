@@ -21,6 +21,7 @@ jobs:
         if: steps.is_team_member.outputs.result == 'false'
         with:
           labels: user-request
+          github_token: ${{ github.token }}
 
       # - name: Notify us if not a kubeshop member
       #   if: |
