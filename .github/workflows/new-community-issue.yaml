@@ -17,11 +17,15 @@ jobs:
           blocked_users: adnanrahic, danielbdias, jfermi, jorgeepc, kdhamric, olha23, schoren, xoscar
 
       - name: Label issue
-        uses: actions-ecosystem/action-add-labels@v1
-        if: steps.is_team_member.outputs.result == 'false'
+        uses: actions/github-script@v6
         with:
-          labels: user-request
-          github_token: ${{ github.token }}
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['user-request']
+            })
 
       # - name: Notify us if not a kubeshop member
       #   if: |
