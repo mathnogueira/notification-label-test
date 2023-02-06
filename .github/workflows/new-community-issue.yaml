@@ -26,6 +26,8 @@ jobs:
           blocked_users: adnanrahic, danielbdias, jfermi, jorgeepc, kdhamric, olha23, schoren, xoscar
 
       - name: Label issue
+        if: |
+          steps.is_team_member.outputs.result == 'false'
         uses: actions/github-script@v6
         with:
           script: |
@@ -36,18 +38,18 @@ jobs:
               labels: ['user-request']
             })
 
-      # - name: Notify us if not a kubeshop member
-      #   if: |
-      #     steps.is_team_member.outputs.result == 'false'
-      #   uses: rtCamp/action-slack-notify@v2
-      #   env:
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      #     SLACK_CHANNEL: tracetest
-      #     SLACK_COLOR: good
-      #     SLACK_ICON: https://github.com/rtCamp.png?size=48
-      #     SLACK_TITLE: An issue was opened by a user
-      #     SLACK_MESSAGE: ${{ github.event.issue.title }}
-      #     SLACK_USERNAME: GitHub
-      #     SLACK_LINK_NAMES: true
-      #     SLACK_FOOTER: ${{ github.event.issue.html_url }}
-      #     MSG_MINIMAL: true
+      - name: Notify us if not a kubeshop member
+        if: |
+          steps.is_team_member.outputs.result == 'false'
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: tracetest
+          SLACK_COLOR: good
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_TITLE: An issue was opened by a user
+          SLACK_MESSAGE: ${{ github.event.issue.title }}
+          SLACK_USERNAME: GitHub
+          SLACK_LINK_NAMES: true
+          SLACK_FOOTER: ${{ github.event.issue.html_url }}
+          MSG_MINIMAL: true
