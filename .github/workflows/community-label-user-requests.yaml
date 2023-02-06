@@ -21,7 +21,7 @@ jobs:
       - name: load team members
         id: load_team_members
         run:
-          echo "team_members=${cat .github/TEAM_MEMBERS.txt | tr '\n' ','}" >> $GITHUB_OUTPUT
+          echo "team_members=$(cat .github/TEAM_MEMBERS.txt | tr '\n' ',')" >> $GITHUB_OUTPUT
       - name: Check if it's team member
         id: is_team_member
         if: github.event.action == 'opened'
