@@ -38,7 +38,7 @@ jobs:
               labels: ['user-request']
             })
 
-      - name: Notify us if not a kubeshop member
+      - name: Notify team
         if: |
           steps.is_team_member.outputs.result == 'false'
         uses: rtCamp/action-slack-notify@v2
