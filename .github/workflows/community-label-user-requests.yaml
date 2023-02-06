@@ -27,13 +27,13 @@ jobs:
       - name: Debug
         run: echo "$MEMBERS"
         env:
-          MEMBERS: steps.load_team_members.outputs.team_members
+          MEMBERS: ${{ steps.load_team_members.outputs.team_members }}
       - name: Check if it's team member
         id: is_team_member
         if: github.event.action == 'opened'
         uses: mathnogueira/user-blocklist@1.0.0
         with:
-          blocked_users: steps.load_team_members.outputs.team_members
+          blocked_users: ${{ steps.load_team_members.outputs.team_members }}
 
       - name: Label issue
         if: |
